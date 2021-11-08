@@ -1,4 +1,4 @@
-##' @title seasonPlot: create seasonality plot for stock prices or cryptocurrencies.
+##' @title seasonPlot: create seasonality plot for stock prices or cryptocurrencies
 ##'
 ##' @description This function is to create a seasonality plot with some color options.
 ##' It uses the same symbols as the quantmod package (e.g. SPY, BTC-USD, and ETH-USD etc).
@@ -6,14 +6,19 @@
 ##' @param Symbols a character vector specifying the names of each symbol to be loaded
 ##' @param StartYear a numeric of start year (Common Er)
 ##' @param EndYear a numeric of end year (Common Er)
-##' @param LineColor a numeric; if 1, red1 is selected, if 2, blue1 is selected,
-##'  if 3, green1 is selected, and if 4, black is selected.
+##' @param LineColor a numeric; if the value is 1, red1 is selected,
+##' if the value is 2, blue1 is selected,
+##' if the value is 3, green1 is selected, and
+##' if the value is 4, black is selected.
+##' If BackgroundMode is TRUE, this argument is disabled.
 ##' @param xlab a character of X-axis label.
 ##' @param BackgroundMode a logical; draw a baclground color by react.
 ##' @param alpha a numeric; The alpha parameter is a number between 0.0 (fully transparent) and 1.0 (fully opaque).
-##' @param Save a logicall; save as image or not
+##' @param Save a logical; save as image or not
 ##' @param output_width a output size of width (pixel). Initial value recommended.
 ##' @param output_height a output size of height (pixel). Initial value recommended.
+##' @param OutpuData a logical; output as a data.frame or not.
+##' @param family a charactor of font.
 ##'
 ##' @return plot result
 ##' @author Satoshi Kume
@@ -23,14 +28,17 @@
 ##' @import plotrix
 ##' @import dygraphs
 ##' @import htmltools
-##' grDevices
+##' @import grDevices
+##' @import graphics
+##' @importFrom utils askYesNo
+##' @importFrom zoo index
 ##'
 ##' @export seasonPlot
 ##'
 ##' @examples \donttest{
 ##'
 ##' # Search by SPY (S&P500 index)
-##' seasonPlot(Symbols = "SPY")
+##' #seasonPlot(Symbols = "SPY")
 ##'
 ##' }
 ##'
@@ -42,9 +50,11 @@ seasonPlot <- function(Symbols,
                        xlab="Monthly",
                        BackgroundMode=TRUE,
                        alpha=0.05,
+                       OutpuData=FALSE,
                        Save=FALSE,
                        output_width=1000,
-                       height=700){
+                       output_height=700,
+                       family="Helvetica"){
 
 #Symbols="SPY"
 #Symbols="BTC-USD"
@@ -53,7 +63,7 @@ seasonPlot <- function(Symbols,
 oldpar <- graphics::par(no.readonly = TRUE)
 on.exit(graphics::par(oldpar))
 
-error <- try(quantmod::getSymbols(Symbols), silent=T)
+error <- try(quantmod::getSymbols(Symbols, auto.assign=TRUE), silent=T)
 if(class(error) == "try-error"){return(message("Warning: No poper value of Symbols"))}
 if((StartYear - EndYear) >= 0){return(message("Warning: No poper value of StartYear or EndYear"))}
 
@@ -61,7 +71,7 @@ Date <- c(paste0(StartYear, "-01-01"), paste0(EndYear, "-12-31"))
 Dat <- quantmod::getSymbols(Symbols, src = "yahoo", verbose = T, auto.assign=FALSE, from = Date[1], to=Date[2])
 colnames(Dat) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted")
 #head(Dat); str(Dat)
-Date00 <- range(as.numeric(substr(index(Dat), start=1, stop = 4)))
+Date00 <- range(as.numeric(substr(zoo::index(Dat), start=1, stop = 4)))
 if((Date00[1] - Date00[2]) >= 0){return(message("Warning: No poper value of StartYear or EndYear"))}
 
 #Plot All
@@ -70,9 +80,9 @@ Dat[,4] %>%
   dygraphs::dySeries("Close", label = "Dat") %>%
   dygraphs::dyRangeSelector(height = 40)
 
-YN <- askYesNo("Do you want to proceed to the next step?")
+YN <- utils::askYesNo("Do you want to proceed to the next step?")
 if(!YN){
-  return(meassage("Finished!!"))
+  return(message("Finished!!"))
 }else{
   grDevices::dev.off()
 }
@@ -167,8 +177,10 @@ switch(as.character(LineColor),
        COL <- "black")
 St <- Dat05$Mean; St00 <- St[!is.na(St)]
 
-PLOT <- function(St=St, St00=St00, Dat05=Dat05, xlab=xlab, BackgroundMode=BackgroundMode, alpha=alpha, Symbols=Symbols){
-par(family="HiraKakuProN-W3",
+PLOT <- function(St=St, St00=St00, Dat05=Dat05, xlab=xlab,
+                 BackgroundMode=BackgroundMode, alpha=alpha, Symbols=Symbols,
+                 family=family){
+par(family=family,
     lwd=1, xpd=F, cex=1, mgp=c(0.5, 1, 0), mai=c(0.5, 0.75, 0.5, 0.5))
 plot(St, type="n", axes = F,
      xlab=xlab,
@@ -225,7 +237,7 @@ lines(D[n]:D[n+1], St[D[n]:D[n+1]], col=G[n], lwd=1.2)
 }}
 
 if(Save){
-png(file = paste0("SeasonalityPlot_", sub(" ", "_", Symbols),
+grDevices::png(filename = paste0("SeasonalityPlot_", sub(" ", "_", Symbols),
                   "_StartYear", StartYear, "_EndYear", EndYear, ".png"),
     width=output_width, height=output_height, res=150)
 PLOT(St=St, St00=St00, Dat05=Dat05, xlab=xlab, BackgroundMode=BackgroundMode, alpha=alpha, Symbols=Symbols)
@@ -234,4 +246,7 @@ grDevices::dev.off()
 PLOT(St=St, St00=St00, Dat05=Dat05, xlab=xlab, BackgroundMode=BackgroundMode, alpha=alpha, Symbols=Symbols)
 }
 
+if(OutpuData){
+  return(Dat05)
+}
 }

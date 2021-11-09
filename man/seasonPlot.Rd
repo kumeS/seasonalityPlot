@@ -2,7 +2,7 @@
 % Please edit documentation in R/seasonPlot.R
 \name{seasonPlot}
 \alias{seasonPlot}
-\title{seasonPlot: create seasonality plot for stock prices or cryptocurrencies}
+\title{seasonPlot: create seasonality plots for stock prices or cryptocurrencies}
 \usage{
 seasonPlot(
   Symbols,
@@ -21,17 +21,17 @@ seasonPlot(
 )
 }
 \arguments{
-\item{Symbols}{a character vector specifying the names of each symbol to be loaded}
+\item{Symbols}{a character vector specifying the names of each symbol to be loaded.
+e.g. ^IXIC (NASDAQ Composite), ^DJI (Dow Jones Industrial Average), SPY (SPDR S&P500 ETF), BTC-USD (Bitcoin), and ETH-USD (Ethereum).}
 
 \item{StartYear}{a numeric of start year (Common Er)}
 
 \item{EndYear}{a numeric of end year (Common Er)}
 
-\item{LineColor}{a numeric; if the value is 1, red1 is selected;
-if the value is 2, blue1 is selected;
-if the value is 3, green1 is selected;
-then if the value is 4, black is selected.
-If BackgroundMode is TRUE, this argument is disabled.}
+\item{LineColor}{a numeric; The value 1 is to select red1,
+the value 2 is to select blue1, the value 3 is to select green1,
+and the value 4 is to select black.
+When BackgroundMode is TRUE, this argument is disabled.}
 
 \item{xlab}{a character of X-axis label.}
 
@@ -55,11 +55,12 @@ If BackgroundMode is TRUE, this argument is disabled.}
 plot results
 }
 \description{
-This function is to create a seasonality plot with some color options.
-It uses the same symbols as the quantmod package (e.g. SPY, BTC-USD, and ETH-USD etc).
-The trading days for each month are aligned and then the rate of change with the beginning of the year being zero is calculated.
-This can set the time period for averaging.
-In addition, years with many missing data are automatically excluded.
+This function is to easily create a seasonality plot with some color options.
+This can use the same symbols as the quantmod package (e.g. SPY, BTC-USD, and ETH-USD etc).
+For the average calculation, the trading days for each month are aligned and then
+the percentages of change with the beginning of the year being zero are calculated.
+This function can set any given time period for averaging.
+In addition, years with many missing data are automatically excluded before the calculation.
 }
 \examples{
 \donttest{

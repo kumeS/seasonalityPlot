@@ -1,4 +1,4 @@
-#NASDAQ Composite
+#^IXIC (NASDAQ Composite)
 IXIC <- list(
 Symbols="^IXIC",
 StartYear=2010,

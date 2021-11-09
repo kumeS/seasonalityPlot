@@ -5,8 +5,8 @@ Version: 0.99.1
 Authors@R: c(person("Satoshi", "Kume", 
              role = c("aut", "cre"),
              email = "satoshi.kume.1984@gmail.com"))
-Description: This provides to create seasonal variation plots of annual averages 
-  of stock prices and cryptocurrencies with some color options. 
+Description: This provides to easily create seasonal variation plots of annual averages 
+  of stock prices and/or cryptocurrencies with some color options. 
   The main function seasonPlot can use the same symbols as the quantmod package 
   (e.g. SPY, BTC-USD, and ETH-USD etc).
 Depends: R (>= 4.0.0)

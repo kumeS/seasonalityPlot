@@ -1,4 +1,4 @@
-#SPDR S&P500 ETF
+#SPY (SPDR S&P500 ETF)
 SPY <- list(
 Symbols="SPY",
 StartYear=2010,

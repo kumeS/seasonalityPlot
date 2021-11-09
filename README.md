@@ -2,7 +2,7 @@
 
 R package for Creating Seasonality Plots of Stock Prices and Cryptocurrencies
 
-[GitHub/seasonalityPlot](https://kumes.github.io/seasonalityPlot/), 
+[GitHub/seasonalityPlot](https://kumes.github.io/seasonalityPlot/)
 
 # Version
 
@@ -10,7 +10,7 @@ R package for Creating Seasonality Plots of Stock Prices and Cryptocurrencies
 
 # Installation
 
-- install the latest from GitHub
+### install the latest from GitHub
 
 type the code below in the R console window
 
@@ -29,21 +29,56 @@ R CMD INSTALL seasonalityPlot
 
 # Function
 
-- seasonPlot: create seasonality plot for stock prices or cryptocurrencies
+- seasonPlot: create seasonality plots for stock prices or cryptocurrencies
 
 # Usage of seasonPlot function
 
 ```r
 library(seasonalityPlot)
 
-#Plot by SPY
-seasonPlot(Symbols="SPY", StartYear = 2015, EndYear = 2020)
+#Plot an averaging seasonality of SPDR S&P500 ETF (SPY) between 2010 and 2020.
+seasonPlot(Symbols="SPY")
 ```
 
 <div style="text-align: center">
-  <img src="inst/images/SeasonalityPlot_SPY_StartYear2015_EndYear2020.png" width="750px">
+  <img src="inst/images/SeasonalityPlot_SPY_StartYear2010_EndYear2020.png" width="750px">
 </div>
 
+```r
+#Plot an averaging seasonality of Dow Jones Industrial Average (^DJI) between 2010 and 2020.
+seasonPlot(Symbols="^DJI")
+```
+
+<div style="text-align: center">
+  <img src="inst/images/SeasonalityPlot_^DJI_StartYear2010_EndYear2020.png" width="750px">
+</div>
+
+```r
+#Plot an averaging seasonality of NASDAQ Composite (^IXIC) between 2010 and 2020.
+seasonPlot(Symbols="^IXIC")
+```
+
+<div style="text-align: center">
+  <img src="inst/images/SeasonalityPlot_^IXIC_StartYear2010_EndYear2020.png" width="750px">
+</div>
+
+```r
+#Plot an averaging seasonality of Bitcoin (BTC-USD) between 2014 and 2020.
+seasonPlot(Symbols="BTC-USD")
+```
+
+<div style="text-align: center">
+  <img src="inst/images/SeasonalityPlot_BTC-USD_StartYear2014_EndYear2020.png" width="750px">
+</div>
+
+```r
+#Plot an averaging seasonality of Ethereum (ETH-USD) between 2015 and 2020.
+seasonPlot(Symbols="ETH-USD")
+```
+
+<div style="text-align: center">
+  <img src="inst/images/SeasonalityPlot_ETH-USD_StartYear2015_EndYear2020.png" width="750px">
+</div>
 
 # License
 

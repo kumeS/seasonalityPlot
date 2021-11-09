@@ -1,4 +1,4 @@
-#Bitcoin
+#BTC-USD (Bitcoin)
 BTC <- list(
 Symbols="BTC-USD",
 StartYear=2015,

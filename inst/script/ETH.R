@@ -1,4 +1,4 @@
-#Ethereum
+#Ethereum (ETH-USD)
 ETH <- list(
 Symbols="ETH-USD",
 StartYear=2016,

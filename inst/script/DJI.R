@@ -1,4 +1,4 @@
-#Dow Jones Industrial Average
+#^DJI (Dow Jones Industrial Average)
 DJI <- list(
 Symbols="^DJI",
 StartYear=2010,

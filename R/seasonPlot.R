@@ -1,19 +1,21 @@
-##' @title seasonPlot: create seasonality plot for stock prices or cryptocurrencies
+##' @title seasonPlot: create seasonality plots for stock prices or cryptocurrencies
 ##'
-##' @description This function is to create a seasonality plot with some color options.
-##' It uses the same symbols as the quantmod package (e.g. SPY, BTC-USD, and ETH-USD etc).
-##' The trading days for each month are aligned and then the rate of change with the beginning of the year being zero is calculated.
-##' This can set the time period for averaging.
-##' In addition, years with many missing data are automatically excluded.
+##' @description This function is to easily create a seasonality plot with some color options.
+##' This can use the same symbols as the quantmod package (e.g. SPY, BTC-USD, and ETH-USD etc).
+##' For the average calculation, the trading days for each month are aligned and then
+##' the percentages of change with the beginning of the year being zero are calculated.
+##' This function can set any given time period for averaging.
+##' In addition, years with many missing data are automatically excluded before the calculation.
 ##'
-##' @param Symbols a character vector specifying the names of each symbol to be loaded
+##' @param Symbols a character vector specifying the names of each symbol to be loaded.
+##' e.g. ^IXIC (NASDAQ Composite), ^DJI (Dow Jones Industrial Average), SPY (SPDR S&P500 ETF), BTC-USD (Bitcoin), and ETH-USD (Ethereum).
 ##' @param StartYear a numeric of start year (Common Er)
 ##' @param EndYear a numeric of end year (Common Er)
-##' @param LineColor a numeric; if the value is 1, red1 is selected;
-##' if the value is 2, blue1 is selected;
-##' if the value is 3, green1 is selected;
-##' then if the value is 4, black is selected.
-##' If BackgroundMode is TRUE, this argument is disabled.
+##' @param LineColor a numeric; The value 1 is to select red1,
+##' the value 2 is to select blue1, the value 3 is to select green1,
+##' and the value 4 is to select black.
+##' When BackgroundMode is TRUE, this argument is disabled.
+##'
 ##' @param xlab a character of X-axis label.
 ##' @param BackgroundMode a logical; draw a background color by react.
 ##' @param alpha a numeric; The alpha parameter is a number between 0.0 (fully transparent) and 1.0 (fully opaque).
@@ -87,7 +89,6 @@ Dat[,4] %>%
   dygraphs::dygraph(main = paste0(Symbols, " Close Price: ",  Date00[2]-Date00[1], "-years")) %>%
   dygraphs::dySeries("Close", label = "Dat") %>%
   dygraphs::dyRangeSelector(height = 40)
-
 YN <- utils::askYesNo("Do you want to proceed to the next step?")
 if(!YN){
   return(message("Finished!!"))
@@ -164,7 +165,7 @@ MonTable <- table(Dat04$Month)
 #Delete the days with no data and connect the data
 Dat04$MissingNum <- sapply(data.frame(t(Dat04[,-c(1,ncol(Dat04))])), function(x) sum(is.na(x)))
 #table(Dat04$MissingNum)
-Dat04 <- Dat04[c(Dat04$MissingNum < 1),]
+Dat04 <- Dat04[c(Dat04$MissingNum < diff(Date00)*0.2),]
 Dat05 <- Dat04
 #table(is.na(Dat05))
 
@@ -196,8 +197,9 @@ A <- round(range(St), 0)
 A1 <- diff(A)/20; A <- A + c(-A1, A1)
 if(A[1] < 0){A[1] <- floor(A[1]/10)*10}else{A[1] <- ceiling(A[1]/10)*10}
 if(A[2] < 0){A[2] <- floor(A[2]/10)*10}else{A[2] <- ceiling(A[2]/10)*10}
-A <- signif(A, digits = 1)
-B <- signif(diff(A), digits = 1)
+A[1] <- signif(A[1], digits = nchar(as.character(abs(A[1])))-1)
+A[2] <- signif(A[2], digits = nchar(as.character(abs(A[2])))-1)
+B <- signif(diff(A), digits = 2)
 C <- cumsum(as.numeric(table(Dat05$Month)))
 
 if(BackgroundMode){
@@ -222,8 +224,14 @@ rect(D[n]+2, A[1],
 G <- c(G, "green1")
 }}}
 
-axis(side=2, labels=paste0(seq(A[1], A[2], by=B/10), "%"), at=seq(A[1], A[2], by=B/10), las=2)
-abline(v=C[-12], col="grey", lty=3, lwd=0.75)
+axis(side=2,
+     labels=paste0(seq(A[1], A[2], by=B/10), "%"),
+     at=seq(A[1], A[2], by=B/10), las=2)
+Lin <- seq(A[1], A[2], by=B/10)
+for(l in 1:12){
+  lines(c(C[l], C[l]),
+      c(Lin[1], Lin[11]), col="grey", lty=3, lwd=0.75)
+}
 abline(h=seq(A[1], A[2], by=B/10), col="black", lty=1, lwd=0.25)
 
 plotrix::boxed.labels(C-c(as.numeric(table(Dat05$Month))/2),
@@ -238,11 +246,12 @@ lines(D[n]:D[n+1], St[D[n]:D[n+1]], col=G[n], lwd=1.2)
 }else{
   lines(St, col=COL, lwd=1.2)
   legend("topleft", legend=Symbols, col=COL, lwd=1, cex=1)
-}}
+}
+}
 
 if(Save){
 grDevices::png(filename = paste0("SeasonalityPlot_", sub(" ", "_", Symbols),
-                  "_StartYear", StartYear, "_EndYear", EndYear, ".png"),
+                  "_StartYear", Date00[1], "_EndYear", Date00[2], ".png"),
     width=output_width, height=output_height, res=150)
 PLOT(St=St, St00=St00, Dat05=Dat05, xlab=xlab, BackgroundMode=BackgroundMode, alpha=alpha, Symbols=Symbols, family=family)
 grDevices::dev.off()
@@ -252,6 +261,8 @@ PLOT(St=St, St00=St00, Dat05=Dat05, xlab=xlab, BackgroundMode=BackgroundMode, al
 }
 
 if(OutputData){
-  return(Dat05)
+  #head(Dat05)
+  return(list(Symbols=Symbols,
+              MeanData=Dat05))
 }
 }

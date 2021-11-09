@@ -6,17 +6,18 @@
 \usage{
 seasonPlot(
   Symbols,
-  StartYear = 2000,
+  StartYear = 2010,
   EndYear = 2020,
   LineColor = 1,
-  xlab = "Monthly",
+  xlab = "Month",
   BackgroundMode = TRUE,
   alpha = 0.05,
-  OutpuData = FALSE,
+  OutputData = FALSE,
   Save = FALSE,
   output_width = 1000,
   output_height = 700,
-  family = "Helvetica"
+  family = "Helvetica",
+  PlotAll = FALSE
 )
 }
 \arguments{
@@ -26,40 +27,45 @@ seasonPlot(
 
 \item{EndYear}{a numeric of end year (Common Er)}
 
-\item{LineColor}{a numeric; if the value is 1, red1 is selected,
-if the value is 2, blue1 is selected,
-if the value is 3, green1 is selected, and
-if the value is 4, black is selected.
+\item{LineColor}{a numeric; if the value is 1, red1 is selected;
+if the value is 2, blue1 is selected;
+if the value is 3, green1 is selected;
+then if the value is 4, black is selected.
 If BackgroundMode is TRUE, this argument is disabled.}
 
 \item{xlab}{a character of X-axis label.}
 
-\item{BackgroundMode}{a logical; draw a baclground color by react.}
+\item{BackgroundMode}{a logical; draw a background color by react.}
 
 \item{alpha}{a numeric; The alpha parameter is a number between 0.0 (fully transparent) and 1.0 (fully opaque).}
 
-\item{OutpuData}{a logical; output as a data.frame or not.}
+\item{OutputData}{a logical; output as a data.frame type or not.}
 
-\item{Save}{a logical; save as image or not}
+\item{Save}{a logical; save as an image (PNG) or not}
 
 \item{output_width}{a output size of width (pixel). Initial value recommended.}
 
 \item{output_height}{a output size of height (pixel). Initial value recommended.}
 
-\item{family}{a charactor of font.}
+\item{family}{a character of font.}
+
+\item{PlotAll}{a logical; display all period by dygraph function or not.}
 }
 \value{
-plot result
+plot results
 }
 \description{
 This function is to create a seasonality plot with some color options.
 It uses the same symbols as the quantmod package (e.g. SPY, BTC-USD, and ETH-USD etc).
+The trading days for each month are aligned and then the rate of change with the beginning of the year being zero is calculated.
+This can set the time period for averaging.
+In addition, years with many missing data are automatically excluded.
 }
 \examples{
 \donttest{
 
-# Search by SPY (S&P500 index)
-#seasonPlot(Symbols = "SPY")
+## Search by SPY (S&P500 index)
+seasonPlot(Symbols = "SPY")
 
 }
 

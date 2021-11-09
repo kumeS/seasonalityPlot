@@ -2,25 +2,29 @@
 ##'
 ##' @description This function is to create a seasonality plot with some color options.
 ##' It uses the same symbols as the quantmod package (e.g. SPY, BTC-USD, and ETH-USD etc).
+##' The trading days for each month are aligned and then the rate of change with the beginning of the year being zero is calculated.
+##' This can set the time period for averaging.
+##' In addition, years with many missing data are automatically excluded.
 ##'
 ##' @param Symbols a character vector specifying the names of each symbol to be loaded
 ##' @param StartYear a numeric of start year (Common Er)
 ##' @param EndYear a numeric of end year (Common Er)
-##' @param LineColor a numeric; if the value is 1, red1 is selected,
-##' if the value is 2, blue1 is selected,
-##' if the value is 3, green1 is selected, and
-##' if the value is 4, black is selected.
+##' @param LineColor a numeric; if the value is 1, red1 is selected;
+##' if the value is 2, blue1 is selected;
+##' if the value is 3, green1 is selected;
+##' then if the value is 4, black is selected.
 ##' If BackgroundMode is TRUE, this argument is disabled.
 ##' @param xlab a character of X-axis label.
-##' @param BackgroundMode a logical; draw a baclground color by react.
+##' @param BackgroundMode a logical; draw a background color by react.
 ##' @param alpha a numeric; The alpha parameter is a number between 0.0 (fully transparent) and 1.0 (fully opaque).
-##' @param Save a logical; save as image or not
+##' @param Save a logical; save as an image (PNG) or not
 ##' @param output_width a output size of width (pixel). Initial value recommended.
 ##' @param output_height a output size of height (pixel). Initial value recommended.
-##' @param OutpuData a logical; output as a data.frame or not.
-##' @param family a charactor of font.
+##' @param OutputData a logical; output as a data.frame type or not.
+##' @param family a character of font.
+##' @param PlotAll a logical; display all period by dygraph function or not.
 ##'
-##' @return plot result
+##' @return plot results
 ##' @author Satoshi Kume
 ##'
 ##' @import quantmod
@@ -32,40 +36,43 @@
 ##' @import graphics
 ##' @importFrom utils askYesNo
 ##' @importFrom zoo index
+##' @importFrom magrittr %>%
 ##'
 ##' @export seasonPlot
 ##'
 ##' @examples \donttest{
 ##'
-##' # Search by SPY (S&P500 index)
-##' #seasonPlot(Symbols = "SPY")
+##' ## Search by SPY (S&P500 index)
+##' seasonPlot(Symbols = "SPY")
 ##'
 ##' }
 ##'
 
 seasonPlot <- function(Symbols,
-                       StartYear=2000,
+                       StartYear=2010,
                        EndYear=2020,
                        LineColor=1,
-                       xlab="Monthly",
+                       xlab="Month",
                        BackgroundMode=TRUE,
                        alpha=0.05,
-                       OutpuData=FALSE,
+                       OutputData=FALSE,
                        Save=FALSE,
                        output_width=1000,
                        output_height=700,
-                       family="Helvetica"){
-
-#Symbols="SPY"
-#Symbols="BTC-USD"
-#Symbols="ETH-USD"
+                       family="Helvetica",
+                       PlotAll=FALSE){
 
 oldpar <- graphics::par(no.readonly = TRUE)
 on.exit(graphics::par(oldpar))
 
+if(!is.numeric(StartYear)){return(message("Warning: No poper value of StartYear"))}
+if(!is.numeric(EndYear)){return(message("Warning: No poper value of EndYear"))}
 error <- try(quantmod::getSymbols(Symbols, auto.assign=TRUE), silent=T)
 if(class(error) == "try-error"){return(message("Warning: No poper value of Symbols"))}
-if((StartYear - EndYear) >= 0){return(message("Warning: No poper value of StartYear or EndYear"))}
+if((StartYear - EndYear) >= 0){
+  if((StartYear - EndYear) == 0){return(message("Warning: StartYear and EndYear are the same value"))}
+  return(message("Warning: No poper value of StartYear or EndYear"))
+}
 
 Date <- c(paste0(StartYear, "-01-01"), paste0(EndYear, "-12-31"))
 Dat <- quantmod::getSymbols(Symbols, src = "yahoo", verbose = T, auto.assign=FALSE, from = Date[1], to=Date[2])
@@ -75,6 +82,7 @@ Date00 <- range(as.numeric(substr(zoo::index(Dat), start=1, stop = 4)))
 if((Date00[1] - Date00[2]) >= 0){return(message("Warning: No poper value of StartYear or EndYear"))}
 
 #Plot All
+if(PlotAll){
 Dat[,4] %>%
   dygraphs::dygraph(main = paste0(Symbols, " Close Price: ",  Date00[2]-Date00[1], "-years")) %>%
   dygraphs::dySeries("Close", label = "Dat") %>%
@@ -83,12 +91,10 @@ Dat[,4] %>%
 YN <- utils::askYesNo("Do you want to proceed to the next step?")
 if(!YN){
   return(message("Finished!!"))
-}else{
-  grDevices::dev.off()
-}
+}}
 
 #Create DF
-Dat00 <- data.frame(Date=index(Dat), Dat[,c(4)], row.names=seq_len(nrow(Dat)))
+Dat00 <- data.frame(Date=zoo::index(Dat), Dat[,c(4)], row.names=seq_len(nrow(Dat)))
 #head(Dat00)
 
 #Organize data
@@ -118,7 +124,6 @@ for(m in 2:ncol(Dat01)){
   Dat01[c(Dat01$Date %in% a$Day),m] <- a$Close
 }
 #head(Dat01); tail(Dat01)
-
 #more that 366/2 days
 Dat02 <- Dat01[, as.vector(apply(Dat01, 2, function(x) sum(is.na(x))) < 366/2)]
 Dat03 <- Dat02
@@ -159,15 +164,15 @@ MonTable <- table(Dat04$Month)
 #Delete the days with no data and connect the data
 Dat04$MissingNum <- sapply(data.frame(t(Dat04[,-c(1,ncol(Dat04))])), function(x) sum(is.na(x)))
 #table(Dat04$MissingNum)
-Dat04 <- Dat04[c(Dat04$MissingNum < 2),]
+Dat04 <- Dat04[c(Dat04$MissingNum < 1),]
 Dat05 <- Dat04
 #table(is.na(Dat05))
 
 #Plot
 Main <- paste0(Symbols, " Seasonality: ", Date00[1], "-", Date00[2])
-#head(Dat05)
 Dat05$Mean <- NA
 Dat05$Mean <- apply(data.frame(Dat05[,c(2:(ncol(Dat05)-3))]), 1, function(x) mean(x[!is.na(x)]))
+#head(Dat05)
 
 switch(as.character(LineColor),
        "1" = COL <- "red1",
@@ -180,8 +185,7 @@ St <- Dat05$Mean; St00 <- St[!is.na(St)]
 PLOT <- function(St=St, St00=St00, Dat05=Dat05, xlab=xlab,
                  BackgroundMode=BackgroundMode, alpha=alpha, Symbols=Symbols,
                  family=family){
-par(family=family,
-    lwd=1, xpd=F, cex=1, mgp=c(0.5, 1, 0), mai=c(0.5, 0.75, 0.5, 0.5))
+graphics::par(family=family, lwd=1, xpd=F, cex=1, mgp=c(0.5, 1, 0), mai=c(0.5, 0.75, 0.5, 0.5))
 plot(St, type="n", axes = F,
      xlab=xlab,
      ylab="", cex.lab=0.75, xlim=c(0,nrow(Dat05)),
@@ -240,13 +244,14 @@ if(Save){
 grDevices::png(filename = paste0("SeasonalityPlot_", sub(" ", "_", Symbols),
                   "_StartYear", StartYear, "_EndYear", EndYear, ".png"),
     width=output_width, height=output_height, res=150)
-PLOT(St=St, St00=St00, Dat05=Dat05, xlab=xlab, BackgroundMode=BackgroundMode, alpha=alpha, Symbols=Symbols)
+PLOT(St=St, St00=St00, Dat05=Dat05, xlab=xlab, BackgroundMode=BackgroundMode, alpha=alpha, Symbols=Symbols, family=family)
 grDevices::dev.off()
+PLOT(St=St, St00=St00, Dat05=Dat05, xlab=xlab, BackgroundMode=BackgroundMode, alpha=alpha, Symbols=Symbols, family=family)
 }else{
-PLOT(St=St, St00=St00, Dat05=Dat05, xlab=xlab, BackgroundMode=BackgroundMode, alpha=alpha, Symbols=Symbols)
+PLOT(St=St, St00=St00, Dat05=Dat05, xlab=xlab, BackgroundMode=BackgroundMode, alpha=alpha, Symbols=Symbols, family=family)
 }
 
-if(OutpuData){
+if(OutputData){
   return(Dat05)
 }
 }

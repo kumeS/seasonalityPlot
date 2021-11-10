@@ -1,14 +1,20 @@
 Package: seasonalityPlot
 Type: Package
-Title: Seasonality Plots of Stock Prices and Cryptocurrencies
-Version: 0.99.1
+Title: Seasonality Variation Plots of Stock Prices and Cryptocurrencies
+Version: 0.99.2
 Authors@R: c(person("Satoshi", "Kume", 
              role = c("aut", "cre"),
              email = "satoshi.kume.1984@gmail.com"))
-Description: This provides to easily create seasonal variation plots of annual averages 
-  of stock prices and/or cryptocurrencies with some color options. 
-  The main function seasonPlot can use the same symbols as the quantmod package 
-  (e.g. SPY, BTC-USD, and ETH-USD etc).
+Description: The price action at any given time is determined by investor 
+  sentiment and market conditions. Although there is no established principle, 
+  over a long period of time, things often move with a certain periodicity.
+  This is sometimes referred to as anomaly. 
+  The seasonPlot() function in this package calculates and visualizes the 
+  average value of price movements over a year for any given period. 
+  In addition, the monthly increase or decrease in price movement is 
+  represented with a colored background. 
+  This seasonPlot() function can use the same symbols as the 'quantmod' package 
+  (e.g. ^IXIC, ^DJI, SPY, BTC-USD, and ETH-USD etc).
 Depends: R (>= 4.0.0)
 Imports: magrittr,
   quantmod,

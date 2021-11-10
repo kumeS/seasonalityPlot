@@ -23,3 +23,5 @@ Makefile
 ^codecov\.yml$
 ^NEWS\.md$
 README.html
+^cran-comments\.md$
+^CRAN-RELEASE$

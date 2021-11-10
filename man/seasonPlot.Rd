@@ -2,7 +2,7 @@
 % Please edit documentation in R/seasonPlot.R
 \name{seasonPlot}
 \alias{seasonPlot}
-\title{seasonPlot: create seasonality plots for stock prices or cryptocurrencies}
+\title{seasonPlot: create seasonality variation plots for stock prices or cryptocurrencies}
 \usage{
 seasonPlot(
   Symbols,
@@ -22,13 +22,14 @@ seasonPlot(
 }
 \arguments{
 \item{Symbols}{a character vector specifying the names of each symbol to be loaded.
-e.g. ^IXIC (NASDAQ Composite), ^DJI (Dow Jones Industrial Average), SPY (SPDR S&P500 ETF), BTC-USD (Bitcoin), and ETH-USD (Ethereum).}
+e.g. ^IXIC (NASDAQ Composite), ^DJI (Dow Jones Industrial Average), SPY (SPDR S&P500 ETF),
+BTC-USD (Bitcoin), ETH-USD (Ethereum), and XRP-USD (Ripple).}
 
 \item{StartYear}{a numeric of start year (Common Er)}
 
 \item{EndYear}{a numeric of end year (Common Er)}
 
-\item{LineColor}{a numeric; The value 1 is to select red1,
+\item{LineColor}{a numeric between 1 and 4; The value 1 is to select red1,
 the value 2 is to select blue1, the value 3 is to select green1,
 and the value 4 is to select black.
 When BackgroundMode is TRUE, this argument is disabled.}
@@ -55,20 +56,19 @@ When BackgroundMode is TRUE, this argument is disabled.}
 plot results
 }
 \description{
-This function is to easily create a seasonality plot with some color options.
-This can use the same symbols as the quantmod package (e.g. SPY, BTC-USD, and ETH-USD etc).
+This function is to easily create seasonality variation plots of
+annual averages of stock prices or cryptocurrencies with some color options.
+This can use the same symbols as the 'quantmod' package.
 For the average calculation, the trading days for each month are aligned and then
 the percentages of change with the beginning of the year being zero are calculated.
 This function can set any given time period for averaging.
-In addition, years with many missing data are automatically excluded before the calculation.
+In addition, years with many missing data are automatically excluded before the average calculation.
+The positive and negative monthly changes are shown in green and red background color, respectively.
 }
 \examples{
-\donttest{
+## Plot seasonality of Bitcoin (BTC-USD)
+seasonPlot(Symbols = "BTC-USD", StartYear=2015, EndYear=2020)
 
-## Search by SPY (S&P500 index)
-seasonPlot(Symbols = "SPY")
-
-}
 
 }
 \author{

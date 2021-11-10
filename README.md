@@ -25,7 +25,7 @@ devtools::install_github("kumeS/seasonalityPlot")
 or install from the source file with `sh` commands
 
 ```sh
-git clone https://github.com/kumeS/seasonalityPlot
+git clone https://github.com/kumeS/seasonalityPlot.git
 R CMD INSTALL seasonalityPlot
 ```
 

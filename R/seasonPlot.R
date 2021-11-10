@@ -81,6 +81,7 @@ if((StartYear - EndYear) >= 0){
 
 Date <- c(paste0(StartYear, "-01-01"), paste0(EndYear, "-12-31"))
 suppressWarnings(Dat <- quantmod::loadSymbols(Symbols, src = "yahoo", verbose = T, auto.assign=FALSE, from = Date[1], to=Date[2]))
+if(class(Dat)[1] != "xts"){ return(message("Warning: No poper value of Dat")) }
 colnames(Dat) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted")
 #head(Dat); str(Dat)
 Date00 <- range(as.numeric(substr(zoo::index(Dat), start=1, stop = 4)))

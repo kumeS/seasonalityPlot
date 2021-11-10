@@ -14,7 +14,7 @@ Description: The price action at any given time is determined by investor
   In addition, the monthly increase or decrease in price movement is 
   represented with a colored background. 
   This seasonPlot() function can use the same symbols as the 'quantmod' package 
-  (e.g. ^IXIC, ^DJI, SPY, BTC-USD, and ETH-USD etc).
+  (e.g. ^IXIC, ^DJI, SPY, BTC-USD, and ETH-USD etc). 
 Depends: R (>= 4.0.0)
 Imports: magrittr,
   quantmod,

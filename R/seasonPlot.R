@@ -68,10 +68,11 @@ seasonPlot <- function(Symbols,
 
 oldpar <- graphics::par(no.readonly = TRUE)
 on.exit(graphics::par(oldpar))
+options("getSymbols.warning4.0"=FALSE)
 
 if(!is.numeric(StartYear)){return(message("Warning: No poper value of StartYear"))}
 if(!is.numeric(EndYear)){return(message("Warning: No poper value of EndYear"))}
-suppressWarnings(error <- try(quantmod::getSymbols(Symbols, auto.assign=TRUE), silent=T))
+suppressWarnings(error <- try(quantmod::loadSymbols(Symbols), silent=T))
 if(class(error) == "try-error"){return(message("Warning: No poper value of Symbols"))}
 if((StartYear - EndYear) >= 0){
   if((StartYear - EndYear) == 0){return(message("Warning: StartYear and EndYear are the same value"))}
@@ -79,7 +80,7 @@ if((StartYear - EndYear) >= 0){
 }
 
 Date <- c(paste0(StartYear, "-01-01"), paste0(EndYear, "-12-31"))
-suppressWarnings(Dat <- quantmod::getSymbols(Symbols, src = "yahoo", verbose = T, auto.assign=FALSE, from = Date[1], to=Date[2]))
+suppressWarnings(Dat <- quantmod::loadSymbols(Symbols, src = "yahoo", verbose = T, auto.assign=FALSE, from = Date[1], to=Date[2]))
 colnames(Dat) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted")
 #head(Dat); str(Dat)
 Date00 <- range(as.numeric(substr(zoo::index(Dat), start=1, stop = 4)))

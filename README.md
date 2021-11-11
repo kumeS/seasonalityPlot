@@ -1,4 +1,4 @@
-# [seasonalityPlot package (version 0.99.43)](https://github.com/kumeS/seasonalityPlot)
+# [seasonalityPlot package (version 0.99.4)](https://github.com/kumeS/seasonalityPlot)
 
 R package for Creating Seasonality Plots of Stock Prices and Cryptocurrencies
 

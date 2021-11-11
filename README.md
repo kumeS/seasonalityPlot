@@ -18,6 +18,12 @@ R package for Creating Seasonality Plots of Stock Prices and Cryptocurrencies
 
 # Installation
 
+### install from CRAN (ver.	0.99.3)
+
+```r
+install.packages("seasonalityPlot", repos="http://cran.r-project.org")
+```
+
 ### install the latest from GitHub
 
 type the code below in the R console window

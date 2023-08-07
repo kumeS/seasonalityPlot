@@ -1,4 +1,4 @@
-# [seasonalityPlot package (version 0.99.4)](https://github.com/kumeS/seasonalityPlot) <img src="[inst/figures/chatAI4R_logo.png](https://github.com/kumeS/seasonalityPlot/blob/main/inst/images/hexSticker_seasonalityPlot.png)" align="right" height="139" />
+# [seasonalityPlot package (version 0.99.4)](https://github.com/kumeS/seasonalityPlot) <img src="https://github.com/kumeS/seasonalityPlot/blob/main/inst/images/hexSticker_seasonalityPlot.png" align="right" height="139" />
 
 [![CRAN](https://www.r-pkg.org/badges/version/seasonalityPlot)](https://cran.r-project.org/web/packages/seasonalityPlot/index.html)
 [![CRAN_latest_release_date](https://www.r-pkg.org/badges/last-release/seasonalityPlot)](https://cran.r-project.org/package=seasonalityPlot)

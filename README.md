@@ -1,4 +1,4 @@
-# [seasonalityPlot package (version 0.99.4)](https://github.com/kumeS/seasonalityPlot)
+# [seasonalityPlot package (version 0.99.4)](https://github.com/kumeS/seasonalityPlot) <img src="[inst/figures/chatAI4R_logo.png](https://github.com/kumeS/seasonalityPlot/blob/main/inst/images/hexSticker_seasonalityPlot.png)" align="right" height="139" />
 
 [![CRAN](https://www.r-pkg.org/badges/version/seasonalityPlot)](https://cran.r-project.org/web/packages/seasonalityPlot/index.html)
 [![CRAN_latest_release_date](https://www.r-pkg.org/badges/last-release/seasonalityPlot)](https://cran.r-project.org/package=seasonalityPlot)
@@ -9,8 +9,6 @@
 R package for Creating Seasonality Plots of Stock Prices and Cryptocurrencies
 
 [GitHub/seasonalityPlot](https://kumes.github.io/seasonalityPlot/)
-
-[<img src="inst/images/hexSticker_seasonalityPlot.png" height="150"/>](https://github.com/kumeS/seasonalityPlot/blob/main/inst/images/hexSticker_seasonalityPlot.png)
 
 # Version
 

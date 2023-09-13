@@ -1,7 +1,7 @@
 Package: seasonalityPlot
 Type: Package
 Title: Seasonality Variation Plots of Stock Prices and Cryptocurrencies
-Version: 0.99.4
+Version: 1.0.1
 Authors@R: c(person("Satoshi", "Kume", 
              role = c("aut", "cre"),
              email = "satoshi.kume.1984@gmail.com"))
@@ -28,5 +28,6 @@ Suggests: testthat
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
-URL: https://kumes.github.io/seasonalityPlot/
+URL: https://github.com/kumeS/seasonalityPlot, https://kumes.github.io/seasonalityPlot/
+BugReports: https://github.com/kumeS/seasonalityPlot/issues
+RoxygenNote: 7.2.3

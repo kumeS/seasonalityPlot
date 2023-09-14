@@ -1,9 +1,9 @@
 # [seasonalityPlot package (version 1.0.1)](https://github.com/kumeS/seasonalityPlot)
  <img src="https://github.com/kumeS/seasonalityPlot/blob/main/inst/images/hexSticker_seasonalityPlot.png" align="right" height="139" />
 
-[![CRAN](https://www.r-pkg.org/badges/version/seasonalityPlot)](https://cran.r-project.org/web/packages/seasonalityPlot/index.html)
+[![CRAN](https://www.r-pkg.org/badges/version/seasonalityPlot)](https://CRAN.R-project.org/package=seasonalityPlot)
 [![CRAN_latest_release_date](https://www.r-pkg.org/badges/last-release/seasonalityPlot)](https://cran.r-project.org/package=seasonalityPlot)
-[![CRAN](https://cranlogs.r-pkg.org/badges/grand-total/seasonalityPlot)](http://www.datasciencemeta.com/rpackages)
+[![CRAN](https://cranlogs.r-pkg.org/badges/grand-total/seasonalityPlot)](https://www.datasciencemeta.com/rpackages)
 [![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/seasonalityPlot)](https://cran.r-project.org/package=seasonalityPlot)
 [![CRAN downloads last week](http://cranlogs.r-pkg.org/badges/last-week/seasonalityPlot)](https://cran.r-project.org/package=seasonalityPlot)
 

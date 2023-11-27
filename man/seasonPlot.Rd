@@ -6,7 +6,7 @@
 \usage{
 seasonPlot(
   Symbols,
-  StartYear = lubridate::year(Sys.Date()) - 6,
+  StartYear = lubridate::year(Sys.Date()) - 11,
   EndYear = lubridate::year(Sys.Date()) - 1,
   LineColor = 1,
   xlab = "Month",
@@ -25,7 +25,7 @@ seasonPlot(
 e.g. ^IXIC (NASDAQ Composite), ^DJI (Dow Jones Industrial Average), SPY (SPDR S&P500 ETF),
 BTC-USD (Bitcoin), ETH-USD (Ethereum), and XRP-USD (Ripple).}
 
-\item{StartYear}{a numeric of start year (Common Er). The default is 6 years from now.}
+\item{StartYear}{a numeric of start year (Common Er). The default is 11 years from now.}
 
 \item{EndYear}{a numeric of end year (Common Er). The default is the last year.}
 

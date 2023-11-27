@@ -13,8 +13,8 @@
 ##' e.g. ^IXIC (NASDAQ Composite), ^DJI (Dow Jones Industrial Average), SPY (SPDR S&P500 ETF),
 ##' BTC-USD (Bitcoin), ETH-USD (Ethereum), and XRP-USD (Ripple).
 ##'
-##' @param StartYear a numeric of start year (Common Er)
-##' @param EndYear a numeric of end year (Common Er)
+##' @param StartYear a numeric of start year (Common Er). The default is 6 years from now.
+##' @param EndYear a numeric of end year (Common Er). The default is the last year.
 ##' @param LineColor a numeric between 1 and 4; The value 1 is to select red1,
 ##' the value 2 is to select blue1, the value 3 is to select green1,
 ##' and the value 4 is to select black.
@@ -48,15 +48,15 @@
 ##' @export seasonPlot
 ##'
 ##' @examples
-##' ## Plot seasonality of Bitcoin (BTC-USD)
-##' seasonPlot(Symbols = "BTC-USD", StartYear=2015, EndYear=2020)
-##'
 ##' ## Plot seasonality of NASDAQ Composite Index (^IXIC)
 ##' seasonPlot(Symbols = "^IXIC")
 ##'
+##' ## Plot seasonality of Bitcoin (BTC-USD)
+##' seasonPlot(Symbols = "BTC-USD", StartYear=2015, EndYear=2020)
+##'
 
 seasonPlot <- function(Symbols,
-                       StartYear = lubridate::year(Sys.Date())-11,
+                       StartYear = lubridate::year(Sys.Date())-6,
                        EndYear = lubridate::year(Sys.Date())-1,
                        LineColor=1,
                        xlab="Month",

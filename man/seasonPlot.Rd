@@ -6,7 +6,7 @@
 \usage{
 seasonPlot(
   Symbols,
-  StartYear = lubridate::year(Sys.Date()) - 11,
+  StartYear = lubridate::year(Sys.Date()) - 6,
   EndYear = lubridate::year(Sys.Date()) - 1,
   LineColor = 1,
   xlab = "Month",
@@ -25,9 +25,9 @@ seasonPlot(
 e.g. ^IXIC (NASDAQ Composite), ^DJI (Dow Jones Industrial Average), SPY (SPDR S&P500 ETF),
 BTC-USD (Bitcoin), ETH-USD (Ethereum), and XRP-USD (Ripple).}
 
-\item{StartYear}{a numeric of start year (Common Er)}
+\item{StartYear}{a numeric of start year (Common Er). The default is 6 years from now.}
 
-\item{EndYear}{a numeric of end year (Common Er)}
+\item{EndYear}{a numeric of end year (Common Er). The default is the last year.}
 
 \item{LineColor}{a numeric between 1 and 4; The value 1 is to select red1,
 the value 2 is to select blue1, the value 3 is to select green1,
@@ -66,11 +66,11 @@ In addition, years with many missing data are automatically excluded before the 
 The positive and negative monthly changes are shown in green and red background color, respectively.
 }
 \examples{
-## Plot seasonality of Bitcoin (BTC-USD)
-seasonPlot(Symbols = "BTC-USD", StartYear=2015, EndYear=2020)
-
 ## Plot seasonality of NASDAQ Composite Index (^IXIC)
 seasonPlot(Symbols = "^IXIC")
+
+## Plot seasonality of Bitcoin (BTC-USD)
+seasonPlot(Symbols = "BTC-USD", StartYear=2015, EndYear=2020)
 
 }
 \author{

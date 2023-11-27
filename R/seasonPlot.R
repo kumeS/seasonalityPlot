@@ -13,7 +13,7 @@
 ##' e.g. ^IXIC (NASDAQ Composite), ^DJI (Dow Jones Industrial Average), SPY (SPDR S&P500 ETF),
 ##' BTC-USD (Bitcoin), ETH-USD (Ethereum), and XRP-USD (Ripple).
 ##'
-##' @param StartYear a numeric of start year (Common Er). The default is 6 years from now.
+##' @param StartYear a numeric of start year (Common Er). The default is 11 years from now.
 ##' @param EndYear a numeric of end year (Common Er). The default is the last year.
 ##' @param LineColor a numeric between 1 and 4; The value 1 is to select red1,
 ##' the value 2 is to select blue1, the value 3 is to select green1,
@@ -56,7 +56,7 @@
 ##'
 
 seasonPlot <- function(Symbols,
-                       StartYear = lubridate::year(Sys.Date())-6,
+                       StartYear = lubridate::year(Sys.Date())-11,
                        EndYear = lubridate::year(Sys.Date())-1,
                        LineColor=1,
                        xlab="Month",

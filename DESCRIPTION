@@ -1,7 +1,7 @@
 Package: seasonalityPlot
 Type: Package
 Title: Seasonality Variation Plots of Stock Prices and Cryptocurrencies
-Version: 1.0.1
+Version: 1.1.0
 Authors@R: c(person("Satoshi", "Kume", 
              role = c("aut", "cre"),
              email = "satoshi.kume.1984@gmail.com"))
@@ -23,7 +23,8 @@ Imports: magrittr,
   htmltools,
   grDevices,
   graphics,
-  zoo
+  zoo,
+  lubridate
 Suggests: testthat
 License: Artistic-2.0
 Encoding: UTF-8

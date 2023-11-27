@@ -43,6 +43,7 @@
 ##' @importFrom utils askYesNo
 ##' @importFrom zoo index
 ##' @importFrom magrittr %>%
+##' @importFrom lubridate year
 ##'
 ##' @export seasonPlot
 ##'
@@ -50,11 +51,13 @@
 ##' ## Plot seasonality of Bitcoin (BTC-USD)
 ##' seasonPlot(Symbols = "BTC-USD", StartYear=2015, EndYear=2020)
 ##'
+##' ## Plot seasonality of NASDAQ Composite Index (^IXIC)
+##' seasonPlot(Symbols = "^IXIC")
 ##'
 
 seasonPlot <- function(Symbols,
-                       StartYear=2010,
-                       EndYear=2020,
+                       StartYear = lubridate::year(Sys.Date())-11,
+                       EndYear = lubridate::year(Sys.Date())-1,
                        LineColor=1,
                        xlab="Month",
                        BackgroundMode=TRUE,
@@ -137,7 +140,7 @@ Mon <- unique(Dat02$Month)
 #head(Dat02)
 
 for(k in Mon){
-#k <- "01"
+#k <- "12"
 Dat02a <- Dat02[Dat02$Month == k,]
 #head(Dat02a)
 for(m in 2:ncol(Dat03)){
@@ -151,9 +154,12 @@ if(SUM == 0){
   b <- a[!is.na(a)]
   b <- c(b, rep(NA, SUM))
   Dat03[c(Dat02$Month == k), m] <- b
-}}}
-#head(Dat03); tail(Dat03)
-Dat04 <- Dat03[as.vector(apply(Dat03, 1, function(x) sum(is.na(x)))) < diff(Date00)*0.6, ]
+  #tail(Dat03, n=50)
+}
+}}
+
+#head(Dat03); tail(Dat03, n=15)
+Dat04 <- Dat03[as.vector(apply(Dat03, 1, function(x) sum(is.na(x)))) < diff(Date00)*0.5, ]
 #head(Dat04); tail(Dat04)
 
 #Set the first day of the year as "0%".
@@ -163,7 +169,39 @@ d <- Dat04[,m]
 Dat04[,m] <- (d/d[!is.na(d)][1])*100 - 100
 }
 Dat04$Month <- substr(Dat04$Date, start=1, stop=2)
-#head(Dat04)
+
+#Check
+#head(Dat04); tail(Dat04); Dat04 <- Dat04[-nrow(Dat04),]
+#table(Dat04$MissingNum)
+#table(Dat04$Month, Dat04$MissingNum)
+
+###################################
+## v1.1.0
+###################################
+##The correction of the data
+#The third to last line
+f0 <- Dat04[nrow(Dat04)-2,]
+if(any(is.na(f0[c(2:(ncol(Dat04)-2))]))){
+f1 <- Dat04[c(nrow(Dat04)-3),]
+Dat04[nrow(Dat04)-2, is.na(f0)] <- f1[,is.na(f0)]
+#tail(Dat04, n=2)
+}
+#The second to last line
+f0 <- Dat04[nrow(Dat04)-1,]
+if(any(is.na(f0[c(2:(ncol(Dat04)-2))]))){
+f1 <- Dat04[c(nrow(Dat04)-2),]
+Dat04[nrow(Dat04)-1, is.na(f0)] <- f1[,is.na(f0)]
+#tail(Dat04, n=2)
+}
+#The last line
+f0 <- Dat04[nrow(Dat04),]
+if(any(is.na(f0[c(2:(ncol(Dat04)-1))]))){
+f1 <- Dat04[c(nrow(Dat04)-1),]
+Dat04[nrow(Dat04), is.na(f0)] <- f1[,is.na(f0)]
+#tail(Dat04, n=2)
+}
+###################################
+
 MonTable <- table(Dat04$Month)
 
 #Delete the days with no data and connect the data
@@ -171,7 +209,6 @@ Dat04$MissingNum <- sapply(data.frame(t(Dat04[,-c(1,ncol(Dat04))])), function(x)
 #table(Dat04$MissingNum)
 Dat04 <- Dat04[c(Dat04$MissingNum < diff(Date00)*0.2),]
 Dat05 <- Dat04
-#table(is.na(Dat05))
 
 #Plot
 Main <- paste0(Symbols, " Seasonality: ", Date00[1], "-", Date00[2])

@@ -6,8 +6,8 @@
 \usage{
 seasonPlot(
   Symbols,
-  StartYear = 2010,
-  EndYear = 2020,
+  StartYear = lubridate::year(Sys.Date()) - 11,
+  EndYear = lubridate::year(Sys.Date()) - 1,
   LineColor = 1,
   xlab = "Month",
   BackgroundMode = TRUE,
@@ -69,6 +69,8 @@ The positive and negative monthly changes are shown in green and red background 
 ## Plot seasonality of Bitcoin (BTC-USD)
 seasonPlot(Symbols = "BTC-USD", StartYear=2015, EndYear=2020)
 
+## Plot seasonality of NASDAQ Composite Index (^IXIC)
+seasonPlot(Symbols = "^IXIC")
 
 }
 \author{

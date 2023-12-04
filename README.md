@@ -55,48 +55,48 @@ R CMD INSTALL seasonalityPlot
 ```r
 library(seasonalityPlot)
 
-#Plot an averaging seasonality of SPDR S&P500 ETF (SPY) between 2010 and 2020.
+#Plot an averaging seasonality of SPDR S&P500 ETF (SPY) between 2012 and 2022.
 seasonPlot(Symbols="SPY")
 ```
 
 <div style="text-align: center">
-  <img src="inst/images/SeasonalityPlot_SPY_StartYear2010_EndYear2020.png" width="750px">
+  <img src="inst/images/SeasonalityPlot_SPY_StartYear2012_EndYear2022.png" width="750px">
 </div>
 
 ```r
-#Plot an averaging seasonality of Dow Jones Industrial Average (^DJI) between 2010 and 2020.
+#Plot an averaging seasonality of Dow Jones Industrial Average (^DJI) between 2012 and 2022.
 seasonPlot(Symbols="^DJI")
 ```
 
 <div style="text-align: center">
-  <img src="inst/images/SeasonalityPlot_^DJI_StartYear2010_EndYear2020.png" width="750px">
+  <img src="inst/images/SeasonalityPlot_^DJI_StartYear2012_EndYear2022.png" width="750px">
 </div>
 
 ```r
-#Plot an averaging seasonality of NASDAQ Composite (^IXIC) between 2010 and 2020.
+#Plot an averaging seasonality of NASDAQ Composite (^IXIC) between 2012 and 2022.
 seasonPlot(Symbols="^IXIC")
 ```
 
 <div style="text-align: center">
-  <img src="inst/images/SeasonalityPlot_^IXIC_StartYear2010_EndYear2020.png" width="750px">
+  <img src="inst/images/SeasonalityPlot_^IXIC_StartYear2012_EndYear2022.png" width="750px">
 </div>
 
 ```r
-#Plot an averaging seasonality of Bitcoin (BTC-USD) between 2014 and 2020.
+#Plot an averaging seasonality of Bitcoin (BTC-USD) between 2017 and 2022.
 seasonPlot(Symbols="BTC-USD")
 ```
 
 <div style="text-align: center">
-  <img src="inst/images/SeasonalityPlot_BTC-USD_StartYear2014_EndYear2020.png" width="750px">
+  <img src="inst/images/SeasonalityPlot_BTC-USD_StartYear2017_EndYear2022.png" width="750px">
 </div>
 
 ```r
-#Plot an averaging seasonality of Ethereum (ETH-USD) between 2015 and 2020.
+#Plot an averaging seasonality of Ethereum (ETH-USD) between 2017 and 2022.
 seasonPlot(Symbols="ETH-USD")
 ```
 
 <div style="text-align: center">
-  <img src="inst/images/SeasonalityPlot_ETH-USD_StartYear2015_EndYear2020.png" width="750px">
+  <img src="inst/images/SeasonalityPlot_ETH-USD_StartYear2017_EndYear2022.png" width="750px">
 </div>
 
 # License

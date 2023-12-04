@@ -13,7 +13,7 @@ R package for Creating Seasonality Plots of Stock Prices and Cryptocurrencies
 
 # Version
 
-1.1.1: Update Figires
+1.1.1: Update Figures
 
 1.1.0: CRAN 3rd version.
 

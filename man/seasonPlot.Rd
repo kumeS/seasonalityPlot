@@ -8,6 +8,7 @@ seasonPlot(
   Symbols,
   StartYear = lubridate::year(Sys.Date()) - 11,
   EndYear = lubridate::year(Sys.Date()) - 1,
+  useAdjusted = FALSE,
   LineColor = 1,
   xlab = "Month",
   BackgroundMode = TRUE,
@@ -29,6 +30,10 @@ BTC-USD (Bitcoin), ETH-USD (Ethereum), and XRP-USD (Ripple).}
 
 \item{EndYear}{a numeric of end year (Common Er). The default is the last year.}
 
+\item{useAdjusted}{Choose whether to use the closing price adjusted for dividends.
+If FALSE, normal close price is used. In the case of cryptocurrencies,
+the useAdjusted option is expected to return the same result.}
+
 \item{LineColor}{a numeric between 1 and 4; The value 1 is to select red1,
 the value 2 is to select blue1, the value 3 is to select green1,
 and the value 4 is to select black.
@@ -38,7 +43,8 @@ When BackgroundMode is TRUE, this argument is disabled.}
 
 \item{BackgroundMode}{a logical; draw a background color by react.}
 
-\item{alpha}{a numeric; The alpha parameter is a number between 0.0 (fully transparent) and 1.0 (fully opaque).}
+\item{alpha}{a numeric; The alpha parameter is a number between 0.0 (fully transparent)
+and 1.0 (fully opaque).}
 
 \item{OutputData}{a logical; output as a data.frame type or not.}
 
@@ -67,10 +73,11 @@ The positive and negative monthly changes are shown in green and red background 
 }
 \examples{
 ## Plot seasonality of NASDAQ Composite Index (^IXIC)
-seasonPlot(Symbols = "^IXIC")
+seasonPlot(Symbols = "^IXIC", useAdjusted = TRUE)
 
 ## Plot seasonality of Bitcoin (BTC-USD)
 seasonPlot(Symbols = "BTC-USD", StartYear=2015, EndYear=2020)
+
 
 }
 \author{

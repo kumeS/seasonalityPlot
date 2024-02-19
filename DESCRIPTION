@@ -24,11 +24,14 @@ Imports: magrittr,
   grDevices,
   graphics,
   zoo,
-  lubridate
+  lubridate,
+  crypto2,
+  TTR,
+  assertthat
 Suggests: testthat
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/kumeS/seasonalityPlot, https://kumes.github.io/seasonalityPlot/
 BugReports: https://github.com/kumeS/seasonalityPlot/issues
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1

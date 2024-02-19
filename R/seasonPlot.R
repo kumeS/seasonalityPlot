@@ -15,14 +15,17 @@
 ##'
 ##' @param StartYear a numeric of start year (Common Er). The default is 11 years from now.
 ##' @param EndYear a numeric of end year (Common Er). The default is the last year.
+##' @param useAdjusted Choose whether to use the closing price adjusted for dividends.
+##'   If FALSE, normal close price is used. In the case of cryptocurrencies,
+##'   the useAdjusted option is expected to return the same result.
 ##' @param LineColor a numeric between 1 and 4; The value 1 is to select red1,
-##' the value 2 is to select blue1, the value 3 is to select green1,
-##' and the value 4 is to select black.
-##' When BackgroundMode is TRUE, this argument is disabled.
-##'
+##'   the value 2 is to select blue1, the value 3 is to select green1,
+##'   and the value 4 is to select black.
+##'   When BackgroundMode is TRUE, this argument is disabled.
 ##' @param xlab a character of X-axis label.
 ##' @param BackgroundMode a logical; draw a background color by react.
-##' @param alpha a numeric; The alpha parameter is a number between 0.0 (fully transparent) and 1.0 (fully opaque).
+##' @param alpha a numeric; The alpha parameter is a number between 0.0 (fully transparent)
+##'   and 1.0 (fully opaque).
 ##' @param Save a logical; save as an image (PNG) or not
 ##' @param output_width a output size of width (pixel). Initial value recommended.
 ##' @param output_height a output size of height (pixel). Initial value recommended.
@@ -49,15 +52,18 @@
 ##'
 ##' @examples
 ##' ## Plot seasonality of NASDAQ Composite Index (^IXIC)
-##' seasonPlot(Symbols = "^IXIC")
+##' seasonPlot(Symbols = "^IXIC", useAdjusted = TRUE)
 ##'
 ##' ## Plot seasonality of Bitcoin (BTC-USD)
 ##' seasonPlot(Symbols = "BTC-USD", StartYear=2015, EndYear=2020)
 ##'
+##'
+
 
 seasonPlot <- function(Symbols,
                        StartYear = lubridate::year(Sys.Date())-11,
                        EndYear = lubridate::year(Sys.Date())-1,
+                       useAdjusted = FALSE,
                        LineColor=1,
                        xlab="Month",
                        BackgroundMode=TRUE,
@@ -87,6 +93,15 @@ suppressWarnings(Dat <- quantmod::loadSymbols(Symbols, src = "yahoo", verbose = 
 if(class(Dat)[1] != "xts"){ return(message("Warning: No poper value of Dat")) }
 colnames(Dat) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted")
 #head(Dat); str(Dat)
+
+###################################
+## v1.2.1
+###################################
+if(useAdjusted){
+Dat$Close <- as.numeric(Dat$Adjusted)
+}
+###################################
+
 Date00 <- range(as.numeric(substr(zoo::index(Dat), start=1, stop = 4)))
 if((Date00[1] - Date00[2]) >= 0){return(message("Warning: No poper value of StartYear or EndYear"))}
 
@@ -211,7 +226,15 @@ Dat04 <- Dat04[c(Dat04$MissingNum < diff(Date00)*0.2),]
 Dat05 <- Dat04
 
 #Plot
+###################################
+## v1.2.1
+###################################
+if(useAdjusted){
+Main <- paste0(Symbols, " Seasonality Adjusted: ", Date00[1], "-", Date00[2])
+}else{
 Main <- paste0(Symbols, " Seasonality: ", Date00[1], "-", Date00[2])
+}
+###################################
 Dat05$Mean <- NA
 Dat05$Mean <- apply(data.frame(Dat05[,c(2:(ncol(Dat05)-3))]), 1, function(x) mean(x[!is.na(x)]))
 #head(Dat05)
@@ -290,8 +313,18 @@ lines(D[n]:D[n+1], St[D[n]:D[n+1]], col=G[n], lwd=1.2)
 }
 }
 
+###################################
+## v1.2.1
+###################################
+if(useAdjusted){
+SeasonalityPlot_name <- "SeasonalityPlot_Adjusted_"
+}else{
+SeasonalityPlot_name <- "SeasonalityPlot_Close_"
+}
+###################################
+
 if(Save){
-grDevices::png(filename = paste0("SeasonalityPlot_", sub(" ", "_", Symbols),
+grDevices::png(filename = paste0(SeasonalityPlot_name, sub(" ", "_", Symbols),
                   "_StartYear", Date00[1], "_EndYear", Date00[2], ".png"),
     width=output_width, height=output_height, res=150)
 PLOT(St=St, St00=St00, Dat05=Dat05, xlab=xlab, BackgroundMode=BackgroundMode, alpha=alpha, Symbols=Symbols, family=family)

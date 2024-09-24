@@ -9,7 +9,9 @@
 
 R package for Creating Seasonality Plots of Stock Prices and Cryptocurrencies
 
-[GitHub/seasonalityPlot](https://kumes.github.io/seasonalityPlot/)
+- [GitHub.io/seasonalityPlot](https://kumes.github.io/seasonalityPlot/)
+
+- [Huggingface Spaces/seasonalityPlot API via Plumber](https://skume-seasonalityplot.hf.space/__docs__/#/)
 
 # Version
 

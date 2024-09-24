@@ -5,6 +5,8 @@
 [![CRAN_latest_release_date](https://www.r-pkg.org/badges/last-release/seasonalityPlot)](https://cran.r-project.org/package=seasonalityPlot)
 [![CRAN](https://cranlogs.r-pkg.org/badges/grand-total/seasonalityPlot)](https://www.datasciencemeta.com/rpackages)
 
+[![CRAN downloads last month](https://cranlogs.r-pkg.org/badges/seasonalityPlot)](https://cran.r-project.org/package=seasonalityPlot)
+
 [![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/seasonalityPlot)](http://cranlogs.r-pkg.org/badges/seasonalityPlot)
 [![CRAN downloads last week](http://cranlogs.r-pkg.org/badges/last-week/seasonalityPlot)](http://cranlogs.r-pkg.org/badges/last-week/seasonalityPlot)
 

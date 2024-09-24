@@ -32,6 +32,6 @@ Suggests: testthat
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/kumeS/seasonalityPlot, https://kumes.github.io/seasonalityPlot/
+URL: https://github.com/kumeS/seasonalityPlot, https://kumes.github.io/seasonalityPlot/, https://skume-seasonalityplot.hf.space/__docs__/#/
 BugReports: https://github.com/kumeS/seasonalityPlot/issues
 RoxygenNote: 7.2.3

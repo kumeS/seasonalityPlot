@@ -9,11 +9,19 @@
 
 R package for Creating Seasonality Plots of Stock Prices and Cryptocurrencies
 
+# Description
+
+The price action at any given time is determined by investor sentiment and market conditions. Although there is no established principle, over a long period of time, things often move with a certain periodicity. This is sometimes referred to as anomaly. The seasonPlot() function in this package calculates and visualizes the average value of price movements over a year for any given period. In addition, the monthly increase or decrease in price movement is represented with a colored background. This seasonPlot() function can use the same symbols as the 'quantmod' package (e.g. ^IXIC, ^DJI, SPY, BTC-USD, and ETH-USD etc).
+
+## Documents and Web API
+
 - [GitHub.io/seasonalityPlot](https://kumes.github.io/seasonalityPlot/)
 
 - [Huggingface Spaces/seasonalityPlot API via Plumber](https://skume-seasonalityplot.hf.space/__docs__/#/)
 
 # Version
+
+1.3.1: Modify the "CryptoRSIheatmap" function (CRAN 4th version) and build the seasonalityPlot Web API on Huggingface Spaces.
 
 1.2.1: Update seasonPlot & Add new function "CryptoRSIheatmap".
 
@@ -55,6 +63,8 @@ R CMD INSTALL seasonalityPlot
 # Function
 
 - seasonPlot: create seasonality plots for stock prices or cryptocurrencies
+
+- CryptoRSIheatmap: CryptoRSI Heatmap Function
 
 # Usage of seasonPlot function
 

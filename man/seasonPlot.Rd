@@ -2,7 +2,7 @@
 % Please edit documentation in R/seasonPlot.R
 \name{seasonPlot}
 \alias{seasonPlot}
-\title{seasonPlot: Function to Plot Seasonality Patterns of Stock Prices or Cryptocurrencies}
+\title{Plot Seasonality Patterns of Stock Prices or Cryptocurrencies}
 \usage{
 seasonPlot(
   Symbols,
@@ -24,66 +24,68 @@ seasonPlot(
 )
 }
 \arguments{
-\item{Symbols}{A character string specifying the symbol to retrieve data for. Examples include `^IXIC` 
-(NASDAQ Composite), `^DJI` (Dow Jones Industrial Average), `SPY` (SPDR S&P500 ETF), `BTC-USD` (Bitcoin), 
+\item{Symbols}{A character string representing the symbol for which to retrieve data. Examples include 
+`^IXIC` (NASDAQ Composite), `^DJI` (Dow Jones Industrial Average), `SPY` (SPDR S&P500 ETF), `BTC-USD` (Bitcoin), 
 `ETH-USD` (Ethereum), and `XRP-USD` (Ripple).}
 
-\item{StartYear}{A numeric value indicating the starting year (Gregorian calendar) for the data aggregation. 
-The default is 11 years prior to the current year.}
+\item{StartYear}{A numeric value specifying the starting year (Gregorian calendar) for data aggregation. 
+Defaults to 11 years before the current year.}
 
-\item{EndYear}{A numeric value indicating the ending year (Gregorian calendar) for the data aggregation. 
-The default is the previous year.}
+\item{EndYear}{A numeric value specifying the ending year (Gregorian calendar) for data aggregation. 
+Defaults to the previous year.}
 
-\item{useAdjusted}{Logical; if `TRUE`, uses the adjusted closing price (adjusted for dividends and splits). 
-If `FALSE`, uses the regular closing price. For cryptocurrencies, using the adjusted price is expected to 
-yield the same result.}
+\item{useAdjusted}{Logical; if `TRUE`, the adjusted closing price (adjusted for dividends and splits) is used. 
+If `FALSE`, the regular closing price is used. For cryptocurrencies, both options yield the same results.}
 
-\item{LineColor}{A numeric value between 1 and 4 to specify the line color: `1` for red, `2` for blue, 
-`3` for green, and `4` for black. This argument is ignored when `BackgroundMode` is `TRUE`.}
+\item{LineColor}{A numeric value (1 to 4) specifying the line color: `1` for red, `2` for blue, `3` for green, 
+and `4` for black. Ignored when `BackgroundMode` is `TRUE`.}
 
 \item{xlab}{A character string for the X-axis label. Default is `"Month"`.}
 
-\item{BackgroundMode}{Logical; if `TRUE`, colors the background of each month based on whether the average 
-monthly change is positive (green) or negative (red).}
+\item{BackgroundMode}{Logical; if `TRUE`, the background is colored based on whether the average monthly change 
+is positive (green) or negative (red).}
 
-\item{alpha}{A numeric value between 0.0 (fully transparent) and 1.0 (fully opaque) specifying the 
-transparency level of the background color.}
+\item{alpha}{A numeric value (0.0 to 1.0) specifying the transparency level for the background color.}
 
 \item{OutputData}{Logical; if `TRUE`, returns the data used for plotting as a `data.frame`.}
 
 \item{Save}{Logical; if `TRUE`, saves the plot as a PNG image.}
 
-\item{output_width}{The width of the output image in pixels when `Save` is `TRUE`. Default is 1000.}
+\item{output_width}{Width of the saved PNG image in pixels. Default is 1000.}
 
-\item{output_height}{The height of the output image in pixels when `Save` is `TRUE`. Default is 700.}
+\item{output_height}{Height of the saved PNG image in pixels. Default is 700.}
 
-\item{family}{A character string specifying the font family for the plot text.}
+\item{family}{A character string specifying the font family for plot text. Default is `"Helvetica"`.}
 
-\item{PlotAll}{Logical; if `TRUE`, displays the entire time series data using 
-the `dygraph` function before proceeding to the seasonality plot.}
+\item{PlotAll}{Logical; if `TRUE`, displays the entire time series data using the `dygraph` package before 
+creating the seasonality plot.}
+
+\item{YearMissingThreshold}{A numeric threshold specifying the maximum allowable number of missing years.}
+
+\item{DayMissingThreshold}{A numeric threshold specifying the maximum allowable number of missing days per year.}
 }
 \value{
-A seasonality plot of the specified symbol. If `OutputData` is `TRUE`, 
-  returns a list containing the symbol and the mean data used for plotting.
+A plot of the seasonality patterns for the specified symbol. If `OutputData` is `TRUE`, 
+  returns a list containing the symbol and the data used for the plot.
 }
 \description{
-The function retrieves price data for a specified symbol, calculates the percentage change 
-  from the beginning of each year, and visualizes the seasonality patterns by averaging over multiple years. 
-  It plots the average monthly changes and can highlight months with positive or negative growth using background 
-  colors. The function automatically excludes years or days with a large amount of missing data to ensure reliable 
-  results. Various customization options are available for line color, background mode, font, and more.
+This function retrieves price data for a specified symbol, calculates the percentage change 
+  from the beginning of each year, and visualizes seasonality patterns by averaging over multiple years. 
+  The plot highlights average monthly changes and can optionally color months with positive or negative growth. 
+  The function automatically excludes years or days with excessive missing data to improve accuracy. 
+  Customization options for line colors, background modes, fonts, and more are available.
 }
 \examples{
+\dontrun{
 ## Plot seasonality of NASDAQ Composite Index (^IXIC)
 seasonPlot(Symbols = "^IXIC", useAdjusted = TRUE)
 
 ## Plot seasonality of Bitcoin (BTC-USD)
-seasonPlot(Symbols = "BTC-USD", StartYear=2015, EndYear=2020)
+seasonPlot(Symbols = "BTC-USD", StartYear = 2015, EndYear = 2020)
 
-## Customize and run missing value tolerances
+## Customize missing value tolerances
 seasonPlot(Symbols = "^IXIC", YearMissingThreshold = 200, DayMissingThreshold = 5)
-
-
+}
 }
 \author{
 Satoshi Kume

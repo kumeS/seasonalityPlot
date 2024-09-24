@@ -3,6 +3,7 @@
 ^\.Rproj\.user$
 cran-comments.md
 ^cran-comments\.md$
-README.html
 ^CRAN-RELEASE$
 ^CRAN-SUBMISSION$
+.github
+paper

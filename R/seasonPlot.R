@@ -28,6 +28,8 @@
 ##' @param output_width The width of the output image in pixels when `Save` is `TRUE`. Default is 1000.
 ##' @param output_height The height of the output image in pixels when `Save` is `TRUE`. Default is 700.
 ##' @param OutputData Logical; if `TRUE`, returns the data used for plotting as a `data.frame`.
+##' @param DayMissingThreshold 
+##' @param YearMissingThreshold
 ##' @param family A character string specifying the font family for the plot text.
 ##' @param PlotAll Logical; if `TRUE`, displays the entire time series data using 
 ##'   the `dygraph` function before proceeding to the seasonality plot.
@@ -51,6 +53,7 @@
 ##' @export seasonPlot
 ##'
 ##' @examples
+##' \dontrun{
 ##' ## Plot seasonality of NASDAQ Composite Index (^IXIC)
 ##' seasonPlot(Symbols = "^IXIC", useAdjusted = TRUE)
 ##'
@@ -59,7 +62,7 @@
 ##'
 ##' ## Customize and run missing value tolerances
 ##' seasonPlot(Symbols = "^IXIC", YearMissingThreshold = 200, DayMissingThreshold = 5)
-##' 
+##' }
 ##' 
 
 

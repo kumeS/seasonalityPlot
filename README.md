@@ -4,9 +4,7 @@
 [![CRAN](https://www.r-pkg.org/badges/version/seasonalityPlot)](https://CRAN.R-project.org/package=seasonalityPlot)
 [![CRAN_latest_release_date](https://www.r-pkg.org/badges/last-release/seasonalityPlot)](https://cran.r-project.org/package=seasonalityPlot)
 [![CRAN](https://cranlogs.r-pkg.org/badges/grand-total/seasonalityPlot)](https://www.datasciencemeta.com/rpackages)
-
 [![CRAN downloads last month](https://cranlogs.r-pkg.org/badges/seasonalityPlot)](https://cran.r-project.org/package=seasonalityPlot)
-
 [![CRAN downloads last week](https://cranlogs.r-pkg.org/badges/last-week/seasonalityPlot)](http://cranlogs.r-pkg.org/badges/last-week/seasonalityPlot)
 
 R package for Creating Seasonality Plots of Stock Prices and Cryptocurrencies

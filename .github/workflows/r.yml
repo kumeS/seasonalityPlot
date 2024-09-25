@@ -7,7 +7,7 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: r-lib/actions/setup-r@main
+      - uses: r-lib/actions@v2
       - name: Install dependencies
         run: Rscript -e "install.packages(c('seasonalityPlot'))"
       - name: Check

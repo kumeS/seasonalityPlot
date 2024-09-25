@@ -1,5 +1,5 @@
 # [seasonalityPlot package](https://github.com/kumeS/seasonalityPlot)
- <img src="https://github.com/kumeS/seasonalityPlot/blob/main/inst/images/hexSticker_seasonalityPlot.png" align="right" height="139" />
+ <img src="https://github.com/kumeS/seasonalityPlot/blob/main/inst/images/hexSticker_seasonalityPlot.png?raw=true" align="right" height="139" />
 
 [![CRAN](https://www.r-pkg.org/badges/version/seasonalityPlot)](https://CRAN.R-project.org/package=seasonalityPlot)
 [![CRAN_latest_release_date](https://www.r-pkg.org/badges/last-release/seasonalityPlot)](https://cran.r-project.org/package=seasonalityPlot)

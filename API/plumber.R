@@ -3,7 +3,7 @@ library(seasonalityPlot)
 library(ggplot2)
 
 # Title
-#* @apiTitle seasonalityPlot API
+#* @apiTitle seasonalityPlot Web API
 
 # Description
 #* @apiDescription This API allows users to access the functionalities of the `seasonalityPlot` R package via a web interface. It provides tools to generate seasonality plots for stock prices and cryptocurrencies, as well as visualizations such as the CryptoRSI heatmap, which displays RSI values across multiple cryptocurrencies. This API enables users to perform these operations without installing the package locally, making the analysis of financial trends and market behaviors accessible from any environment.
@@ -16,7 +16,7 @@ library(ggplot2)
 # TOS link
 #* @apiTOS 
 # Version
-#* @apiVersion 1.2.1
+#* @apiVersion 1.3.1
 # Tag Description
 #* @apiTag seasonalityPlot "API" "generating seasonality plots" "CryptoRSI heatmaps" "`seasonalityPlot`"
 

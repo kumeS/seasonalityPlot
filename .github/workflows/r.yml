@@ -20,6 +20,6 @@ jobs:
       
       - name: Install seasonalityPlot
         run: |
-          Rscript -e 'library(seasonalityPlot)'
+          Rscript -e 'install.packages("seasonalityPlot"); library(seasonalityPlot)'
 
 

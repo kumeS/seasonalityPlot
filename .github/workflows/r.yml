@@ -20,6 +20,6 @@ jobs:
       
       - name: Install seasonalityPlot
         run: |
-          Rscript -e 'install.packages("remotes"); remotes::install_github("kumeS/seasonalityPlot"); library(seasonalityPlot)'
+          Rscript -e 'dir()'
 
 

@@ -20,6 +20,8 @@ jobs:
       
       - name: Install seasonalityPlot
         run: |
+          cd ../
           Rscript -e 'dir()'
-
+          R CMD INSTALL seasonalityPlot
+          Rscript -e 'install.packages("devtools"); devtools::check("seasonalityPlot", cran=TRUE)'
 
